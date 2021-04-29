@@ -43,9 +43,20 @@ const cityList = [{
  * @returns all cities where population is lower than the specified and the area
  * is greater then the specified.
  */
-const cityFilter = (list, population, area) => {};
+const cityFilter = (list, population, area) => {
+   const result = list.filter(item=>item.population < population && item.area > area);
+   return result.map(item=>item.name);
+};
 
-const citySorter = (list, key) => {};
+const citySorter = (list, key) => {
+   return list.sort(function(a,b){ 
+       if(typeof a[key] === "number" && typeof b[key] === "number"){
+           return a[key]-b[key];
+       }else{
+       return ('' + a[key]).toLowerCase().localeCompare(('' + b[key]).toLowerCase());
+   };
+   });
+}
 
 const citySlicer = (list, limit) => {
     return citySorter(list, 'name').slice(0, limit);
